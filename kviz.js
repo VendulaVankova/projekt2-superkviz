@@ -85,7 +85,7 @@ function klikNaOdpoved() {
     }
 }
 
-function zobrazHodnoceni() {
+function zobrazVyhodnoceni() {
     //skryjeme div s otazkami
     document.querySelector('.kviz').style.display = 'none';
     //odkryjeme div s vyhodnocením
@@ -110,7 +110,7 @@ function zobrazHodnoceni() {
         let spravne = document.createElement('p');
         if (parseInt(meOdpovedi[i]) === otazky[i].spravna) {
             pocetSpravnych++;
-            spravne.textContent = 'To je správně.';
+            spravne.textContent = 'Jedná se o správnou odpověď.';
         } else {
             spravne.textContent = 'Správná odpověď: ' + otazky[i].odpovedi[otazky[i].spravna];
         }
@@ -119,7 +119,7 @@ function zobrazHodnoceni() {
 
     //vypsání finálního výsledku úspěšnosti
     let procenta = document.createElement('h2');
-    procenta.textContent += 'Správně ' + pocetSpravnych + ' ze ' + otazky.length + 'otázek. Úspěšnost ' + Math.round(pocetSpravnych / otazky.length * 100) + ' %';
+    procenta.textContent += 'Uvedla jsi správně ' + pocetSpravnych + ' ze ' + otazky.length + ' otázek. Tvá úspěšnost je ' + Math.round(pocetSpravnych / otazky.length * 100) + ' %.';
     hodnoceni.appendChild(procenta);
 
 }
