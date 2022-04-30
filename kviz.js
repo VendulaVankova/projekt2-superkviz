@@ -34,3 +34,13 @@ const otazky = [{
 
     }
 ];
+
+// nastavení prvků, se kterými budeme pracovat
+
+const poradi = document.getElementById('poradi');
+const otazka = document.getElementById('otazka');
+const obrazek = document.getElementById('obrazek');
+const moznosti = document.getElementById('moznosti');
+
+let aktualniOtazka = 0;
+let meOdpovedi = [];
