@@ -73,3 +73,53 @@ function zobrazOtazku() {
     document.getElementById('odpovedi').remove();
     moznosti.appendChild(seznam);
 }
+
+function klikNaOdpoved() {
+    let odpoved = this.dataset.odpoved;
+    meOdpovedi.push(odpoved);
+    aktualniOtazka = aktualniOtazka + 1;
+    if (aktualniOtazka === otazky.length) {
+        zobrazVyhodnoceni();
+    } else {
+        zobrazOtazku();
+    }
+}
+
+function zobrazHodnoceni() {
+    //skryjeme div s otazkami
+    document.querySelector('.kviz').style.display = 'none';
+    //odkryjeme div s vyhodnocením
+    document.querySelector('.vysledek').style.display = 'block';
+    //najdeme div, do kterého budeme vypisovat text
+    const hodnoceni = document.getElementById('hodnoceni');
+
+    let pocetSpravnych = 0;
+
+    for (let i = 0; i < otazky.length; i++) {
+        //přidáme informace o otázce
+        let nadpis = document.createElement('h3');
+        nadpis.textContent = (i + 1) + '. ' + otazky[i].otazka;
+        hodnoceni.appendChild(nadpis);
+
+        //přidáme odpověď
+        let me = document.createElement('p');
+        me.textContent = 'Tvá odpověď: ' + otazky[i].odpovedi[meOdpovedi[i]];
+        hodnoceni.appendChild(me);
+
+        //přidáme informaci o správnosti odpovědi
+        let spravne = document.createElement('p');
+        if (parseInt(meOdpovedi[i]) === otazky[i].spravna) {
+            pocetSpravnych++;
+            spravne.textContent = 'To je správně.';
+        } else {
+            spravne.textContent = 'Správná odpověď: ' + otazky[i].odpovedi[otazky[i].spravna];
+        }
+        hodnoceni.appendChild(spravne);
+    }
+
+    //vypsání finálního výsledku úspěšnosti
+    let procenta = document.createElement('h2');
+    procenta.textContent += 'Správně ' + pocetSpravnych + ' ze ' + otazky.length + 'otázek. Úspěšnost ' + Math.round(pocetSpravnych / otazky.length * 100) + ' %';
+    hodnoceni.appendChild(procenta);
+
+}
